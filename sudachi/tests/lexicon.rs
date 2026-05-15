@@ -63,6 +63,7 @@ fn word_info() {
     assert_eq!("た", wi.normalized_form());
     assert_eq!(-1, wi.dictionary_form_word_id());
     assert_eq!("た", wi.dictionary_form());
+    assert_eq!("タ", wi.dictionary_reading_form());
     assert_eq!("タ", wi.reading_form());
     assert!(wi.a_unit_split().is_empty());
     assert!(wi.b_unit_split().is_empty());
@@ -92,6 +93,8 @@ fn word_info() {
     assert_eq!("行く", wi.normalized_form());
     assert_eq!(7, wi.dictionary_form_word_id());
     assert_eq!("行く", wi.dictionary_form());
+    assert_eq!("イク", wi.dictionary_reading_form());
+    assert_eq!("イッ", wi.reading_form());
 }
 
 #[test]

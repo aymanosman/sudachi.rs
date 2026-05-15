@@ -65,8 +65,10 @@ impl<'a> WordInfos<'a> {
         // consult dictionary form
         let dfwi = word_info.dictionary_form_word_id;
         if (dfwi >= 0) && (dfwi != word_id as i32) {
-            let inner = self.parse_word_info(dfwi as u32, InfoSubset::SURFACE)?;
+            let inner =
+                self.parse_word_info(dfwi as u32, InfoSubset::SURFACE | InfoSubset::READING_FORM)?;
             word_info.dictionary_form = inner.surface;
+            word_info.dictionary_reading_form = inner.reading_form;
         };
 
         Ok(word_info.into())
@@ -86,6 +88,7 @@ pub struct WordInfoData {
     pub normalized_form: String,
     pub dictionary_form_word_id: i32,
     pub dictionary_form: String,
+    pub dictionary_reading_form: String,
     pub reading_form: String,
     pub a_unit_split: Vec<WordId>,
     pub b_unit_split: Vec<WordId>,
@@ -134,6 +137,14 @@ impl WordInfo {
             self.surface()
         } else {
             &self.data.dictionary_form
+        }
+    }
+
+    pub fn dictionary_reading_form(&self) -> &str {
+        if self.data.dictionary_reading_form.is_empty() {
+            self.reading_form()
+        } else {
+            &self.data.dictionary_reading_form
         }
     }
 

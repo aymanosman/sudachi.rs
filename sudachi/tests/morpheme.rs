@@ -50,12 +50,24 @@ fn morpheme_attributes() {
     assert_eq!("京都", ms.get(0).dictionary_form());
     assert_eq!("京都", ms.get(0).normalized_form());
     assert_eq!("キョウト", ms.get(0).reading_form());
+    assert_eq!("キョウト", ms.get(0).dictionary_reading_form());
 
     assert!(!ms.get(0).is_oov());
 
     assert_eq!(3, ms.get(0).word_id().word());
     assert_eq!(0, ms.get(0).dictionary_id());
     assert_eq!([1, 5], ms.get(0).synonym_group_ids());
+}
+
+#[test]
+fn morpheme_dictionary_reading_form() {
+    let tok = TestTokenizer::new();
+    let ms = tok.tokenize("行った", Mode::C);
+
+    assert_eq!("行っ", ms.get(0).surface().deref());
+    assert_eq!("行く", ms.get(0).dictionary_form());
+    assert_eq!("イッ", ms.get(0).reading_form());
+    assert_eq!("イク", ms.get(0).dictionary_reading_form());
 }
 
 #[test]

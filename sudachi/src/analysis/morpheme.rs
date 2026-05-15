@@ -94,6 +94,13 @@ impl<'a, T: DictionaryAccess> Morpheme<'a, T> {
         self.get_word_info().dictionary_form()
     }
 
+    /// Returns the reading form of the dictionary form of morpheme.
+    ///
+    /// Returns Japanese syllabaries 'フリガナ' in katakana.
+    pub fn dictionary_reading_form(&self) -> &str {
+        self.get_word_info().dictionary_reading_form()
+    }
+
     /// Returns the normalized form of morpheme
     ///
     /// This method returns the form normalizing inconsistent spellings and inflected forms
@@ -164,6 +171,7 @@ impl<T: DictionaryAccess> std::fmt::Debug for Morpheme<'_, T> {
             .field("normalized_form", &self.normalized_form())
             .field("reading_form", &self.reading_form())
             .field("dictionary_form", &self.dictionary_form())
+            .field("dictionary_reading_form", &self.dictionary_reading_form())
             .finish()
     }
 }
